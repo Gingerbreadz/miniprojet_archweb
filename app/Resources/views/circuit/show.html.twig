@@ -63,11 +63,14 @@
     </ul>
 	</div> {# circuit #}
 
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		<h4><a href="{{ path('admin_circuit_edit', {'circuitid': circuit.id}) }}"> Modifier Circuit</a></h4>
-	{% endif %}
-	{% if is_granted('ROLE_ADMIN') %}
-		<h4><a href="{{ path('admin_circuit_remove', {'circuitid': circuit.id}) }}"> Supprimer Circuit</a></h4>
-	{% endif %}
-
 {% endblock %}  {# main #}
+
+{% block sidebar %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('admin_circuit_edit', {'circuitid': circuit.id}) }}"> Modifier Circuit</a>
+    {% endif %}
+    <br>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_circuit_remove', {'circuitid': circuit.id}) }}"> Supprimer Circuit</a>
+    {% endif %}
+{% endblock %}
