@@ -23,32 +23,27 @@ class __TwigTemplate_88bedb168ec45d66de0bb89da847635df3462a65f46e62b31c6ad0cde1e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c304df99bb49d3f7841367a43dfeb4059fb6ee999bdf92d24bb4d616eada3c3c = $this->env->getExtension("native_profiler");
-        $__internal_c304df99bb49d3f7841367a43dfeb4059fb6ee999bdf92d24bb4d616eada3c3c->enter($__internal_c304df99bb49d3f7841367a43dfeb4059fb6ee999bdf92d24bb4d616eada3c3c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "agvoybase.html.twig"));
+        $__internal_b506244925a6d78e5e9098d51d38314d8e799726209b834c93d35235994a4c54 = $this->env->getExtension("native_profiler");
+        $__internal_b506244925a6d78e5e9098d51d38314d8e799726209b834c93d35235994a4c54->enter($__internal_b506244925a6d78e5e9098d51d38314d8e799726209b834c93d35235994a4c54_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "agvoybase.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_c304df99bb49d3f7841367a43dfeb4059fb6ee999bdf92d24bb4d616eada3c3c->leave($__internal_c304df99bb49d3f7841367a43dfeb4059fb6ee999bdf92d24bb4d616eada3c3c_prof);
+        $__internal_b506244925a6d78e5e9098d51d38314d8e799726209b834c93d35235994a4c54->leave($__internal_b506244925a6d78e5e9098d51d38314d8e799726209b834c93d35235994a4c54_prof);
 
     }
 
     // line 3
     public function block_header($context, array $blocks = array())
     {
-        $__internal_5fd47d8f62f3dc8845bf8361add2d4074029bdb14ec84fd1ee0b5135ce8b4449 = $this->env->getExtension("native_profiler");
-        $__internal_5fd47d8f62f3dc8845bf8361add2d4074029bdb14ec84fd1ee0b5135ce8b4449->enter($__internal_5fd47d8f62f3dc8845bf8361add2d4074029bdb14ec84fd1ee0b5135ce8b4449_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header"));
+        $__internal_f43e50487f5a0768506b328b6e4e56656ea671d0cedf5ab9ff1e6c12d4705618 = $this->env->getExtension("native_profiler");
+        $__internal_f43e50487f5a0768506b328b6e4e56656ea671d0cedf5ab9ff1e6c12d4705618->enter($__internal_f43e50487f5a0768506b328b6e4e56656ea671d0cedf5ab9ff1e6c12d4705618_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header"));
 
         // line 4
         echo "            <header>
                 <div class=\"navbar navbar-default navbar-static-top\" role=\"navigation\">
                     <div class=\"container\">
                         <div class=\"navbar-header\">
-                            <a class=\"navbar-brand\" href=\"";
-        // line 8
-        echo $this->env->getExtension('routing')->getPath("homepage");
-        echo "\">
-                                Accueil Symfony
-                            </a>
+                           
 
                             <button type=\"button\" class=\"navbar-toggle\"
                                     data-toggle=\"collapse\"
@@ -63,9 +58,9 @@ class __TwigTemplate_88bedb168ec45d66de0bb89da847635df3462a65f46e62b31c6ad0cde1e
                             <ul class=\"nav navbar-nav\">
 
                                 ";
-        // line 24
+        // line 22
         $this->displayBlock('header_navigation_links', $context, $blocks);
-        // line 35
+        // line 42
         echo "
                             </ul>
                         </div>
@@ -74,43 +69,61 @@ class __TwigTemplate_88bedb168ec45d66de0bb89da847635df3462a65f46e62b31c6ad0cde1e
             </header>
 ";
         
-        $__internal_5fd47d8f62f3dc8845bf8361add2d4074029bdb14ec84fd1ee0b5135ce8b4449->leave($__internal_5fd47d8f62f3dc8845bf8361add2d4074029bdb14ec84fd1ee0b5135ce8b4449_prof);
+        $__internal_f43e50487f5a0768506b328b6e4e56656ea671d0cedf5ab9ff1e6c12d4705618->leave($__internal_f43e50487f5a0768506b328b6e4e56656ea671d0cedf5ab9ff1e6c12d4705618_prof);
 
     }
 
-    // line 24
+    // line 22
     public function block_header_navigation_links($context, array $blocks = array())
     {
-        $__internal_420b1fb0e8a21e7216d8fb5542a8307578bfd31126868ea7df6d124a24f49914 = $this->env->getExtension("native_profiler");
-        $__internal_420b1fb0e8a21e7216d8fb5542a8307578bfd31126868ea7df6d124a24f49914->enter($__internal_420b1fb0e8a21e7216d8fb5542a8307578bfd31126868ea7df6d124a24f49914_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header_navigation_links"));
+        $__internal_a9014fcaaad7f891614209d5488e6e66596b72936da32b09a9335045d1fb8947 = $this->env->getExtension("native_profiler");
+        $__internal_a9014fcaaad7f891614209d5488e6e66596b72936da32b09a9335045d1fb8947->enter($__internal_a9014fcaaad7f891614209d5488e6e66596b72936da32b09a9335045d1fb8947_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "header_navigation_links"));
 
-        // line 25
+        // line 23
         echo "                                    <li>
                                         <a href=\"";
-        // line 26
-        echo $this->env->getExtension('routing')->getPath("circuit_index");
+        // line 24
+        echo $this->env->getExtension('routing')->getPath("page_accueil");
         echo "\">Accueil</a>
                                     </li>
+                                     <li>
+                                        <a href=\"";
+        // line 27
+        echo $this->env->getExtension('routing')->getPath("page_actualite");
+        echo "\">Actualités</a>
+                                    </li>
+                                    <li>
+                                        <a href=\"";
+        // line 30
+        echo $this->env->getExtension('routing')->getPath("circuit_index");
+        echo "\"> Nos offres</a> 
+                                    </li>
+                                    <li>
+                                        <a href=\"";
+        // line 33
+        echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
+        echo "\"> login</a>
+                                    </li>
                                 ";
-        // line 34
+        // line 41
         echo "                                ";
         
-        $__internal_420b1fb0e8a21e7216d8fb5542a8307578bfd31126868ea7df6d124a24f49914->leave($__internal_420b1fb0e8a21e7216d8fb5542a8307578bfd31126868ea7df6d124a24f49914_prof);
+        $__internal_a9014fcaaad7f891614209d5488e6e66596b72936da32b09a9335045d1fb8947->leave($__internal_a9014fcaaad7f891614209d5488e6e66596b72936da32b09a9335045d1fb8947_prof);
 
     }
 
-    // line 43
+    // line 50
     public function block_sidebar($context, array $blocks = array())
     {
-        $__internal_4337524f8e9b4ee23d173baf0919eadefae901052b3143dba51e8c936c576b36 = $this->env->getExtension("native_profiler");
-        $__internal_4337524f8e9b4ee23d173baf0919eadefae901052b3143dba51e8c936c576b36->enter($__internal_4337524f8e9b4ee23d173baf0919eadefae901052b3143dba51e8c936c576b36_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "sidebar"));
+        $__internal_a91f801d166eadf18502f29f3ab4a2ee844df3dd55c8ec5888cee37d8a6357f2 = $this->env->getExtension("native_profiler");
+        $__internal_a91f801d166eadf18502f29f3ab4a2ee844df3dd55c8ec5888cee37d8a6357f2->enter($__internal_a91f801d166eadf18502f29f3ab4a2ee844df3dd55c8ec5888cee37d8a6357f2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "sidebar"));
 
-        // line 44
+        // line 51
         echo "\t<h4>About</h4>
 \t<p>Bienvenue sur notre agence virtuelle.</p>
 ";
         
-        $__internal_4337524f8e9b4ee23d173baf0919eadefae901052b3143dba51e8c936c576b36->leave($__internal_4337524f8e9b4ee23d173baf0919eadefae901052b3143dba51e8c936c576b36_prof);
+        $__internal_a91f801d166eadf18502f29f3ab4a2ee844df3dd55c8ec5888cee37d8a6357f2->leave($__internal_a91f801d166eadf18502f29f3ab4a2ee844df3dd55c8ec5888cee37d8a6357f2_prof);
 
     }
 
@@ -126,7 +139,7 @@ class __TwigTemplate_88bedb168ec45d66de0bb89da847635df3462a65f46e62b31c6ad0cde1e
 
     public function getDebugInfo()
     {
-        return array (  109 => 44,  103 => 43,  96 => 34,  91 => 26,  88 => 25,  82 => 24,  69 => 35,  67 => 24,  48 => 8,  42 => 4,  36 => 3,  11 => 1,);
+        return array (  122 => 51,  116 => 50,  109 => 41,  104 => 33,  98 => 30,  92 => 27,  86 => 24,  83 => 23,  77 => 22,  64 => 42,  62 => 22,  42 => 4,  36 => 3,  11 => 1,);
     }
 }
 /* {% extends 'base.html.twig' %}*/
@@ -136,9 +149,7 @@ class __TwigTemplate_88bedb168ec45d66de0bb89da847635df3462a65f46e62b31c6ad0cde1e
 /*                 <div class="navbar navbar-default navbar-static-top" role="navigation">*/
 /*                     <div class="container">*/
 /*                         <div class="navbar-header">*/
-/*                             <a class="navbar-brand" href="{{ path('homepage') }}">*/
-/*                                 Accueil Symfony*/
-/*                             </a>*/
+/*                            */
 /* */
 /*                             <button type="button" class="navbar-toggle"*/
 /*                                     data-toggle="collapse"*/
@@ -154,7 +165,16 @@ class __TwigTemplate_88bedb168ec45d66de0bb89da847635df3462a65f46e62b31c6ad0cde1e
 /* */
 /*                                 {% block header_navigation_links %}*/
 /*                                     <li>*/
-/*                                         <a href="{{ path('circuit_index') }}">Accueil</a>*/
+/*                                         <a href="{{ path('page_accueil') }}">Accueil</a>*/
+/*                                     </li>*/
+/*                                      <li>*/
+/*                                         <a href="{{ path('page_actualite') }}">Actualités</a>*/
+/*                                     </li>*/
+/*                                     <li>*/
+/*                                         <a href="{{ path('circuit_index') }}"> Nos offres</a> */
+/*                                     </li>*/
+/*                                     <li>*/
+/*                                         <a href="{{ path('fos_user_security_login') }}"> login</a>*/
 /*                                     </li>*/
 /*                                 {# {% if is_granted('ROLE_ADMIN') %}*/
 /*                                     <li>*/

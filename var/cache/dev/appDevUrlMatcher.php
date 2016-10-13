@@ -118,6 +118,28 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // page_accueil
+        if ($pathinfo === '/home') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_page_accueil;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\CircuitController::showMainPageAction',  '_route' => 'page_accueil',);
+        }
+        not_page_accueil:
+
+        // page_actualite
+        if ($pathinfo === '/actuality') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_page_actualite;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\CircuitController::showActualityPageAction',  '_route' => 'page_actualite',);
+        }
+        not_page_actualite:
+
         if (0 === strpos($pathinfo, '/circuit')) {
             // circuit_index
             if (rtrim($pathinfo, '/') === '/circuit') {
