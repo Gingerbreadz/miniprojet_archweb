@@ -42,5 +42,8 @@
 {% block sidebar %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <a href="{{ path('admin_circuit_new') }}"> Nouveau Circuit</a>
+    {% else %}
+        <h4>About</h4>
+        <p>Bienvenue sur notre agence virtuelle.</p>
     {% endif %}
 {% endblock %}
