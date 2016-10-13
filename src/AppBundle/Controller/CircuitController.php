@@ -11,7 +11,30 @@ use AppBundle\Entity\Circuit;
  * Circuit controller.
  */
 class CircuitController extends Controller
-{
+{	/**
+     * HomePage
+     *
+     * @Route("/home", name="page_accueil")
+     * @Method("GET")
+     */
+	public function showMainPageAction()
+	{
+		return $this->render('circuit/home.html.twig');
+	}
+	
+	/**
+	 * Actuality
+	 *
+	 * @Route("/actuality", name="page_actualite")
+	 * @Method("GET")
+	 */
+	public function showActualityPageAction()
+	{
+		return $this->render('circuit/actuality.html.twig');
+	}
+	
+	
+	
     /**
      * Lists all Circuit entities.
      *
