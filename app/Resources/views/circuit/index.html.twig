@@ -1,7 +1,7 @@
 {% extends 'agvoybase.html.twig' %}
 
 {% block main %}
-    <h1>Nos circuits</h1>
+    <h1>Nos circuits </h1>
 
     <table>
         <thead>
@@ -35,5 +35,9 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h4><a href="{{ path('admin_circuit_new') }}"> Nouveau Circuit</a></h4>
+    {% endif %}
     
 {% endblock %} {# main #}
