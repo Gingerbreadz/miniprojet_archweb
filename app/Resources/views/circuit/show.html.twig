@@ -21,17 +21,33 @@
 				    	<th>Numéro</th>
 						<th>Ville</th>
 						<th>Nombre jours</th>
-						<th></th>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<th>Actions</th>
+                        {% endif %}
 					</tr>
 				</thead>
 				<tbody>
- 			{% for etape in circuit.etapes %}
-	 		<tr>
-			   <td>{{ etape.numeroEtape }}</td>
-			   <td>{{ etape.villeEtape }}</td> 
-			   <td>{{ etape.nombreJours }} j.</td>
-			</tr>
-			{% endfor %} {# circuit.etapes #}
+         			{% for etape in circuit.etapes %}
+        	 		<tr>
+        			   <td>{{ etape.numeroEtape }}</td>
+        			   <td>{{ etape.villeEtape }}</td> 
+        			   <td>{{ etape.nombreJours }} j.</td>
+        			   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        			   <td><a href="{{ path('admin_etape_edit', { 'circuitid': circuit.id, 'etapeid': etape.id }) }}">Modifier </a>
+        			   		{% if is_granted('ROLE_ADMIN') %}
+        			   			<a href="{{ path('admin_etape_remove', { 'circuitid': circuit.id, 'etapeid': etape.id }) }}">Supprimer </a>	
+        			   		{% endif %}
+        			   </td>                       	
+                       {% endif %}
+        			</tr>
+        			{% endfor %} {# circuit.etapes #}
+        			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        			<tr><td></td>       	
+        				<td></td>
+        				<td></td>
+        				<td><a href="{{ path('admin_etape_new', { 'circuitid': circuit.id }) }}">Nouvelle </a></td>
+        			</tr>
+        			{% endif %}
 			</tbody>
 			</table>
 		</div> {# circuit_details #}
@@ -44,7 +60,9 @@
 				    	<th>Date de départ</th>
 						<th>Nombre de personnes</th>
 						<th>Prix</th>
-						<th></th>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<th>Actions</th>
+                        {% endif %}
 					</tr>
 				</thead>
 		{%  for programmation in circuit.programmations %}
@@ -52,8 +70,22 @@
 			   <td>{{ programmation.dateDepart|date('d-m-Y')  }}</td>
 			   <td>{{ programmation.nombrePersonnes }}</td> 
 			   <td>{{ programmation.prix }} euros</td>
+			   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        			<td><a href="{{ path('admin_programmation_edit', { 'circuitid': circuit.id, 'programmationid': programmation.id }) }}">Modifier </a>
+        			   	{% if is_granted('ROLE_ADMIN') %}
+        			   		<a href="{{ path('admin_programmation_remove', { 'circuitid': circuit.id, 'programmationid': programmation.id }) }}">Supprimer </a>	
+        				{% endif %}
+        			</td>                       	
+              {% endif %}
 			</tr>
 		{% endfor %}
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        			<tr><td></td>       	
+        				<td></td>
+        				<td></td>
+        				<td><a href="{{ path('admin_programmation_new', { 'circuitid': circuit.id }) }}">Nouvelle </a></td>
+        			</tr>
+        	{% endif %}
 		</table>
 	</div> {# programmations #}
     <ul>
@@ -66,11 +98,15 @@
 {% endblock %}  {# main #}
 
 {% block sidebar %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('admin_circuit_edit', {'circuitid': circuit.id}) }}"> Modifier Circuit</a>
-    {% endif %}
-    <br>
+    
     {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_circuit_edit', {'circuitid': circuit.id}) }}"> Modifier Circuit</a><br>
         <a href="{{ path('admin_circuit_remove', {'circuitid': circuit.id}) }}"> Supprimer Circuit</a>
+    {% elseif is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('admin_circuit_edit', {'circuitid': circuit.id}) }}"> Modifier Circuit</a><br>
+    {% else %}
+        <h4>About</h4>
+        <p>Bienvenue sur notre agence virtuelle.</p>
     {% endif %}
+    
 {% endblock %}

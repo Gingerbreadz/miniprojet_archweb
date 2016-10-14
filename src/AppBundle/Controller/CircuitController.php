@@ -44,8 +44,12 @@ class CircuitController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        
         $circuits = $em->getRepository('AppBundle:Circuit')->findAll();
+		
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        	//$circuits = $em->getRepository('AppBundle:Circuit')->findByProgrammationsCircuit();
+        }        
 
         return $this->render('circuit/index.html.twig', array(
             'circuits' => $circuits,

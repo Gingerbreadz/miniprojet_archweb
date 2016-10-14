@@ -34,16 +34,23 @@
                 </td>
             </tr>
         {% endfor %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        	<tr>
+        		<td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><ul>
+                        <li>
+                            <a href="{{ path('admin_circuit_new') }}"> Nouveau Circuit</a>
+                        </li>
+                    </ul>
+                </td>
+        	</tr>
+        {% endif %}
         </tbody>
     </table>
 
-{% endblock %} {# main #}
-
-{% block sidebar %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('admin_circuit_new') }}"> Nouveau Circuit</a>
-    {% else %}
-        <h4>About</h4>
-        <p>Bienvenue sur notre agence virtuelle.</p>
-    {% endif %}
-{% endblock %}
+{% endblock %} {# main #}    

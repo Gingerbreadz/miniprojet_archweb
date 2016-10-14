@@ -2,7 +2,13 @@
 
 
 {% block main %}
-    <h1>Gestion des Circuits</h1>
+    <h2>Gestion du circuit {{ circuit.description }}</h2>
+    
+    {% if etape is defined %}
+    <h3>Edition de l'étape {{ etape.numeroEtape }}</h3>
+    {% elseif programmation is defined %}
+    <h3>Edition de la programmation du {{ programmation.dateDepart|date('d-m-Y') }}</h3>
+    {% endif %}
 	
     {{ form_start(form) }}
     {{ form_widget(form) }}
