@@ -48,7 +48,11 @@ class CircuitController extends Controller
         $circuits = $em->getRepository('AppBundle:Circuit')->findAll();
 		
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-        	//$circuits = $em->getRepository('AppBundle:Circuit')->findByProgrammationsCircuit();
+        	for($i = 0; $i < count($circuits); ++$i) {
+                if ($circuits[$i]->getProgrammations()->isEmpty()){
+                    unset($circuits[$i]);
+                }
+            }
         }        
 
         return $this->render('circuit/index.html.twig', array(
@@ -66,6 +70,11 @@ class CircuitController extends Controller
      */
     public function showAction(Circuit $circuit)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
+            && $circuit->getProgrammations()->isEmpty()) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->render('circuit/show.html.twig', array(
             'circuit' => $circuit,
         ));
