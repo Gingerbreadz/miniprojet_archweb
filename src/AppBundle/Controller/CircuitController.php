@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Circuit;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Circuit controller.
@@ -41,7 +45,7 @@ class CircuitController extends Controller
                     unset($circuits[$i]);
                 }
             }
-        }        
+        }
 
         return $this->render('circuit/index.html.twig', array(
             'circuits' => $circuits,
@@ -65,7 +69,7 @@ class CircuitController extends Controller
         }
 
         return $this->render('circuit/show.html.twig', array(
-            'circuit' => $circuit,
+            'circuit' => $circuit
         ));
     }
 
