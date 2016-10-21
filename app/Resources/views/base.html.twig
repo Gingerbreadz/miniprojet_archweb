@@ -6,14 +6,14 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
         	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-        	<link rel="stylesheet" href="{{ asset('css/carousel.css') }}" />
+        	{#<link rel="stylesheet" href="{{ asset('css/carousel.css') }}" />#}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body style="height: 100%;">
+    <body>
     	{% block header %}<header><p>HEADER</p></header>{% endblock %}
 
-    	<div class="container body-container">
+    	<div class="container">
             {% block body %}
                 <div class="row">
                     <div id="main" class="col-sm-9">
@@ -29,10 +29,11 @@
         </div>
 
         {% block footer %}
-        	<footer class="navbar-fixed-bottom" style="margin-bottom: 30px;">
-        		<p class="pull-right "><a href="#">Back to top</a></p>
-        		<p>© 2013 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-      </footer>
+        	<footer class="panel-footer navbar-fixed-bottom"
+                 style="padding-bottom: 2%;background: rgba(238, 238, 238, 0.6);">
+        		    <p class="pull-right navbar-text"><a href="#">Back to top</a></p>
+        		    <p class="navbar-text">© 2013 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+            </footer>
         {% endblock %}
         {% block javascripts %}
         	<script src="{{ asset('js/jquery.min.js') }}"></script>

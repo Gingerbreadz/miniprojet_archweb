@@ -22,19 +22,6 @@ class CircuitController extends Controller
 		return $this->render('circuit/home.html.twig');
 	}
 	
-	/**
-	 * Actuality
-	 *
-	 * @Route("/actuality", name="page_actualite")
-	 * @Method("GET")
-	 */
-	public function showActualityPageAction()
-	{
-		return $this->render('circuit/actuality.html.twig');
-	}
-	
-	
-	
     /**
      * Lists all Circuit entities.
      *
@@ -46,7 +33,8 @@ class CircuitController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         $circuits = $em->getRepository('AppBundle:Circuit')->findAll();
-		
+
+        // Remove unscheduled circuit for anonymous users
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
         	for($i = 0; $i < count($circuits); ++$i) {
                 if ($circuits[$i]->getProgrammations()->isEmpty()){
@@ -70,6 +58,7 @@ class CircuitController extends Controller
      */
     public function showAction(Circuit $circuit)
     {
+        // Prevent anonymous from accessing unscheduled circuit
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
             && $circuit->getProgrammations()->isEmpty()) {
             throw $this->createAccessDeniedException();

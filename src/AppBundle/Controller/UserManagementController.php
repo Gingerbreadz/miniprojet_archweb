@@ -26,6 +26,7 @@ class UserManagementController extends Controller
      */
     public function indexAction()
     {
+        // Only admin can access this route
     	if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
     		throw $this->createAccessDeniedException();
     	}
@@ -50,6 +51,7 @@ class UserManagementController extends Controller
      */
     public function newAction($userid = null, Request $request)
     {
+        // Only admin can access this route
    		 if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw $this->createAccessDeniedException();
 		 }
@@ -84,24 +86,25 @@ class UserManagementController extends Controller
 		->getForm();
 		
 		$form->handleRequest($request);
-		
+
+        //Encode password; needed to connect successfully
 		$passwordEncoder = $this->container->get('security.password_encoder');
 		$encodedPassword = $passwordEncoder->encodePassword($user, $form["password"]->getData());
 		$user->setPassword($encodedPassword);
-		
+        $user->setEnabled(true);
+
 		if ($form->isSubmitted() && $form->isValid()) {
 				
-			// Persist for good in the DB
-			
-			$user->setEnabled(true);
+			//Call user update method from userManager
 			$userManager = $this->get('fos_user.user_manager');
 			$userManager->updateUser($user);
+            // Persist for good in the DB
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($user);
 		
 			$entityManager->flush();
 				
-			// We may have created a new user of edidting an existing one
+			// We may have created a new user or edidting an existing one
 			if($userid) {
 				$message = 'utilisateur '. $user->getId() .' modifié avec succès';
 			} else {
@@ -124,6 +127,7 @@ class UserManagementController extends Controller
      */
     public function delAction($userid, Request $request)
     {
+        // Only admin can access this route
     	if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
     		throw $this->createAccessDeniedException();
     	}

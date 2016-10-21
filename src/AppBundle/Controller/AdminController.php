@@ -5,14 +5,14 @@ use AppBundle\Entity\Circuit;
 use AppBundle\Entity\Etape;
 use AppBundle\Entity\ProgrammationCircuit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
  * Controller used to manage circuit contents.
@@ -31,6 +31,7 @@ class AdminController extends Controller
 	 */
 	public function newAction($circuitid = null, Request $request)
 	{
+	    // Only registered users can access this route
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw $this->createAccessDeniedException();
 		}
@@ -47,16 +48,8 @@ class AdminController extends Controller
 				// cause the 404 page not found to be displayed
 				throw $this->createNotFoundException();
 			}
-			
-			if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-				throw $this->createAccessDeniedException();
-			}
 		}
 		else {
-			if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-				throw $this->createAccessDeniedException();
-			}
-			
 			$circuit = new Circuit();
 		}
 
@@ -67,10 +60,6 @@ class AdminController extends Controller
 		->add('villeDepart', TextType::class)
 		->add('villeArrivee', TextType::class);
 		
-		if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-			//Special Admin Feature
-		}
-		
 		$form = $formBuilder->add('save', SubmitType::class, array('label' => 'Valider'))
 		->getForm();
 		
@@ -78,8 +67,6 @@ class AdminController extends Controller
 		
 		if ($form->isSubmitted() && $form->isValid()) {
 
-			//$circuit->setSlug($this->get('slugger')->slugify($circuit->getTitle()));
-		
 				// Persist for good in the DB
 				$entityManager = $this->getDoctrine()->getManager();
 				$entityManager->persist($circuit);
@@ -114,6 +101,7 @@ class AdminController extends Controller
 	 */	
 	public function newetapeAction($circuitid, $etapeid = null, Request $request)
 	{
+        // Only registered users can access this route
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw $this->createAccessDeniedException();
 		}
@@ -143,7 +131,6 @@ class AdminController extends Controller
 			}
 		}
 		else {
-			
 			$etape = new Etape();
 			$etape->setCircuit($circuit);
 		}
@@ -154,19 +141,14 @@ class AdminController extends Controller
 		->add('villeEtape', TextType::class)
 		->add('nombreJours', NumberType::class);
 		
-		if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-			//Special Admin Feature
-		}
-		
 		$form = $formBuilder->add('save', SubmitType::class, array('label' => 'Valider'))
 		->getForm();
 		$form->handleRequest($request);
 	
 		if ($form->isSubmitted() && $form->isValid()) {
-		
-			//$circuit->setSlug($this->get('slugger')->slugify($circuit->getTitle()));
+
+		    //update circuit
 			$circuit->addEtape($etape);
-			$circuit->updateLastEtape();
 			// Persist for good in the DB
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($etape);
@@ -174,7 +156,7 @@ class AdminController extends Controller
 		
 			$entityManager->flush();
 				
-			// We may have created a new circuit of edidting an existing one
+			// We may have created a new etape or edidting an existing one
 			if($etapeid) {
 				$message = 'etape '. $etape->getId() .' modifié avec succès';
 			} else {
@@ -194,7 +176,7 @@ class AdminController extends Controller
 	}	
 
 	/**
-	 * Creates and Edit stop-over of a circuit.
+	 * Creates and Edit schedule of a circuit.
 	 *
 	 * Create a new stop-over
 	 * @Route("/manage/circuit/{circuitid}/programmation/new", name="admin_programmation_new")
@@ -204,6 +186,7 @@ class AdminController extends Controller
 	 */	
 	public function newprogrammationAction($circuitid, $programmationid = null, Request $request)
 	{
+        // Only registered users can access this route
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
 			throw $this->createAccessDeniedException();
 		}
@@ -233,7 +216,6 @@ class AdminController extends Controller
 			}
 		}
 		else {
-				
 			$programmation = new ProgrammationCircuit();
 			$programmation->setCircuit($circuit);
 		}
@@ -254,7 +236,7 @@ class AdminController extends Controller
 	
 		if ($form->isSubmitted() && $form->isValid()) {
 	
-			//$circuit->setSlug($this->get('slugger')->slugify($circuit->getTitle()));
+			//Update the circuit
 			$circuit->addProgrammation($programmation);
 			// Persist for good in the DB
 			$entityManager = $this->getDoctrine()->getManager();
@@ -288,11 +270,12 @@ class AdminController extends Controller
 	 * Or Deletes a Stop-Over entity.
 	 * @Route("/manage/circuit/{circuitid}/etape/{etapeid}/remove", name="admin_etape_remove")
 	 * 
-	 * Or Deletes a Programmation entity.
+	 * Or Deletes a Schedule entity.
 	 * @Route("/manage/circuit/{circuitid}/programmation/{programmationid}/remove", name="admin_programmation_remove")
 	 */	
 	public function delAction($circuitid, $etapeid = null, $programmationid = null, Request $request)
 	{
+        // Only registered admin can access this route
 		if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 			throw $this->createAccessDeniedException();
 		}
