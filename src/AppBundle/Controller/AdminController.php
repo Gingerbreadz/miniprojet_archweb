@@ -166,6 +166,7 @@ class AdminController extends Controller
 		
 			//$circuit->setSlug($this->get('slugger')->slugify($circuit->getTitle()));
 			$circuit->addEtape($etape);
+			$circuit->updateLastEtape();
 			// Persist for good in the DB
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($etape);

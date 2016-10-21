@@ -317,6 +317,23 @@ class Circuit
         
         return $this;
     }
+    
+    /**
+     * Update Last etape
+     *
+     * @param 
+     *
+     * @return Circuit
+     */
+    public function updateLastEtape()
+    {
+    	$etapes = $this->getEtapes();
+    	$lastEtape = array_pop((array_slice(this->etapes[], -1)));
+    
+    	$this->setVilleArrivee($lastEtape->getVilleEtape());
+    
+    	return $this;
+    }
 
     /**
      * Get etapes
