@@ -1,0 +1,48 @@
+{% extends 'agvoybase.html.twig' %}
+
+{% block main %}
+
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Id </th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_users_edit', { 'userid': user.id }) }}">Modifier </a>
+                            <a href="{{ path('admin_users_remove', { 'userid': user.id }) }}">Supprimer </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        	<tr>
+        		<td></td>
+                <td></td>
+                <td></td>
+                <td><ul>
+                        <li>
+                            <a href="{{ path('admin_users_new') }}">Nouvel Utilisateur </a>
+                        </li>
+                    </ul>
+                </td>
+        	</tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %} {# main #}    

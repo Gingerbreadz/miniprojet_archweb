@@ -2,7 +2,12 @@
 
 
 {% block main %}
+	
+	{% if circuit is defined %}
     <h2>Gestion du circuit {{ circuit.description }}</h2>
+    {% elseif user is defined %}
+    <h2>Gestion de l'utilisateur {{ user.id }}</h2>
+    {% endif %}
     
     {% if etape is defined %}
     <h3>Edition de l'étape {{ etape.numeroEtape }}</h3>
